@@ -18,7 +18,7 @@ public class Trigger : MonoBehaviour
       manager = FindObjectOfType<TriggerSystemManager>();
    }
 
-   public virtual void TryDetection(Sensor sensor)
+   public virtual void Try(Sensor sensor)
    {
          
    }
