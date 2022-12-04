@@ -12,13 +12,12 @@ public class Trigger : MonoBehaviour
    //Trigger radius
    public int radius;
    public bool toBeRemoved;
-
    private void Awake()
    {
       manager = FindObjectOfType<TriggerSystemManager>();
    }
 
-   public void Start()
+   protected virtual void Start()
    {
       
    }
