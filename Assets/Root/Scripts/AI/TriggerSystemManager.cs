@@ -33,7 +33,7 @@ public class TriggerSystemManager : MonoBehaviour
             }
             else
             {
-                trigger.UpdateStatus();
+                trigger.UpdateMe();
             }
         }
 

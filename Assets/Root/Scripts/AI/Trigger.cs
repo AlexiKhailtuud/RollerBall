@@ -18,20 +18,23 @@ public class Trigger : MonoBehaviour
       manager = FindObjectOfType<TriggerSystemManager>();
    }
 
+   public void Start()
+   {
+      
+   }
+
    public virtual void Try(Sensor sensor)
    {
          
    }
 
-   public virtual void UpdateStatus()
+   public virtual void UpdateMe()
    {
       
    }
 
-   protected virtual bool isTrigger(Sensor sensor)
+   protected virtual bool isTouchingTrigger(Sensor sensor)
    {
       return false;
    }
-   
-   
 }
