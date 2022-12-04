@@ -6,9 +6,8 @@ public class TriggerLimitedLife : Trigger
 {
    protected int lifetime;
 
-   protected override void Start()
+   private void Start()
    {
-      base.Start();
       
    }
 

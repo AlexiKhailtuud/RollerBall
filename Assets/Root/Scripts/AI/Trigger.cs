@@ -17,7 +17,7 @@ public class Trigger : MonoBehaviour
       manager = FindObjectOfType<TriggerSystemManager>();
    }
 
-   protected virtual void Start()
+   protected void Start()
    {
       
    }

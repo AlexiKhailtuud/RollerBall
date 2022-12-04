@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class SightTrigger : Trigger
 {
-    void Start()
+    private void Start()
     {
-        base.Start();
         manager.RegisterTrigger(this);
     }
     
