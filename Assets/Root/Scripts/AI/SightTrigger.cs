@@ -32,10 +32,10 @@ public class SightTrigger : Trigger
         {
             var rayDistance = transform.position - tempSensor.transform.position;
 
-            if (Vector3.Angle(rayDistance, tempSensor.transform.forward) < (sensor as SightSensor).viewDistance)
+            if (Vector3.Angle(rayDistance, tempSensor.transform.forward) < (sensor as SightSensor).fieldOfView)
             {
-                if (Physics.Raycast(tempSensor.transform.position + new Vector3(0, 1, 0), rayDistance,
-                        out RaycastHit hit))
+                if (Physics.Raycast(tempSensor.transform.position, rayDistance,
+                        out RaycastHit hit, (sensor as SightSensor).viewDistance))
                 {
                     if (hit.collider.gameObject == gameObject)
                     {

@@ -11,6 +11,11 @@ public class Sensor : MonoBehaviour
     public SensorType sensorType;
     public string sensorName;
     
+    private void Awake()
+    {
+        manager = FindObjectOfType<TriggerSystemManager>();
+    }
+    
     public virtual void Notify(Trigger trigger)
     {
         

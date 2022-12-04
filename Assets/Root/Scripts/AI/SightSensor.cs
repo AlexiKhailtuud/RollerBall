@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SightSensor : Sensor
 {
-    public float fieldOfView = 45;
+    public float fieldOfView = 45f;
     public float viewDistance = 100f;
 
     private AIController controller;
@@ -38,8 +38,8 @@ public class SightSensor : Sensor
         Vector3 rightRayPoint = transform.TransformPoint(new Vector3(-viewDistance * Mathf.Sin(fieldOfViewInRadius), 0,
             viewDistance * Mathf.Cos(fieldOfViewInRadius)));
         
-        Debug.DrawLine(transform.position + new Vector3(0, 1, 0), frontRayPoint + new Vector3(0, 1, 0), Color.green);
-        Debug.DrawLine(transform.position + new Vector3(0,1, 0), leftRayPoint + new Vector3(0, 1, 0), Color.green);
-        Debug.DrawLine(transform.position + new Vector3(0, 1, 0), rightRayPoint + new Vector3(0, 1, 0) , Color.green);
+        Debug.DrawLine(transform.position, frontRayPoint + new Vector3(0, 1, 0), Color.green);
+        Debug.DrawLine(transform.position, leftRayPoint + new Vector3(0, 1, 0), Color.green);
+        Debug.DrawLine(transform.position, rightRayPoint + new Vector3(0, 1, 0) , Color.green);
     }
 }
