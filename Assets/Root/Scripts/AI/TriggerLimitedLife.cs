@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class TriggerLimitedLife : Trigger
 {
-   protected int lifetime;
+   protected float lifetime;
 
    private void Start()
    {
-      
+      base.Start();
    }
 
    public override void UpdateMe()
    {
-      if (--lifetime <= 0)
+      lifetime -= Time.deltaTime;
+      Mathf.Clamp(lifetime, 0, lifetime);
+      
+      if (lifetime <= 0)
       {
          toBeRemoved = true;
       }

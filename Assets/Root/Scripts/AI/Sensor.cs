@@ -9,7 +9,7 @@ public class Sensor : MonoBehaviour
     protected TriggerSystemManager manager;
 
     public SensorType sensorType;
-    public string sensorName;
+    //public string sensorName;
     
     private void Awake()
     {
