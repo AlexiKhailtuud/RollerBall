@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SoundTrigger : TriggerLimitedLife
 {
+    public float radius;
     private void Start()
     {
         lifetime = 3;
@@ -29,6 +30,7 @@ public class SoundTrigger : TriggerLimitedLife
 
         if (sensor.sensorType == SensorType.Sound)
         {
+            Debug.Log("fkkkk");
             if (Vector3.Distance(transform.position, g.transform.position) < radius)
             {
                 return true;

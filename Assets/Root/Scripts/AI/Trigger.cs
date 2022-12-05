@@ -10,7 +10,6 @@ public class Trigger : MonoBehaviour
    //Trigger position
    protected Vector3 position;
    //Trigger radius
-   public int radius;
    public bool toBeRemoved;
    private void Awake()
    {
