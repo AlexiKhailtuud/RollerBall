@@ -13,7 +13,7 @@ public class SenseMemory : MonoBehaviour
     {
         foreach (MemoryItem memo in memoryList)
         {
-            if (memo.g.tag == "Player")
+            if (memo.go.tag == "Player")
                 return true;
         }
 
@@ -26,7 +26,7 @@ public class SenseMemory : MonoBehaviour
 
         foreach (MemoryItem memo in memoryList)
         {
-            if (memo.g == go)
+            if (memo.go == go)
             {
                 alreadyInList = true;
                 memo.lastMemoryTime = Time.time;
