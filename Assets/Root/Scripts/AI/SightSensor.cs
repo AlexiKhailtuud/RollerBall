@@ -5,16 +5,20 @@ using UnityEngine;
 
 public class SightSensor : Sensor
 {
+    public SenseMemory senseMemory;
+    
     public float fieldOfView = 45f;
     public float viewDistance = 100f;
 
-    private AIController controller;
+    //private AIController controller;
 
     private void Start()
     {
-        controller = GetComponent<AIController>();
+        //controller = GetComponent<AIController>();
         sensorType = SensorType.Sight;
         manager.RegisterSensor(this);
+
+        senseMemory = GetComponent<SenseMemory>();
     }
 
     private void Update()
@@ -26,6 +30,11 @@ public class SightSensor : Sensor
     {
         //Debug.Log($"I see a {trigger.gameObject.name}");
         //Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
+
+        if (senseMemory != null)
+        {
+            senseMemory.AddToList(trigger.gameObject, 0.6f);
+        }
     }
 
     private void OnDrawGizmos()
