@@ -13,7 +13,7 @@ public class SightTrigger : Trigger
     public override void UpdateMe()
     {
         base.UpdateMe();
-        position = transform.position;
+        position = transform.position; //I dont see the use of this variable? 
     }
 
     public override void Try(Sensor sensor)

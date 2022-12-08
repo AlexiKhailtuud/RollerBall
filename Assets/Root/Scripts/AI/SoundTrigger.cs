@@ -8,7 +8,7 @@ public class SoundTrigger : TriggerLimitedLife
     public float radius;
     private void Start()
     {
-        lifetime = 3;
+        lifetime = 3.0f;
         base.Start();
         
         manager.RegisterTrigger(this);
@@ -30,7 +30,6 @@ public class SoundTrigger : TriggerLimitedLife
 
         if (sensor.sensorType == SensorType.Sound)
         {
-            Debug.Log("fkkkk");
             if (Vector3.Distance(transform.position, g.transform.position) < radius)
             {
                 return true;

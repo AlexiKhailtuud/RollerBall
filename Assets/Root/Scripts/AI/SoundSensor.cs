@@ -22,10 +22,11 @@ public class SoundSensor : Sensor
 
     public override void Notify(Trigger trigger)
     {
-        Debug.Log("I heard something strange!");
+        //Debug.Log("I heard something strange!");
         
         if (senseMemory != null)
         {
+            Debug.Log("Adding sound to list");
             senseMemory.AddToList(trigger.gameObject, 0.3f);
         }
     }

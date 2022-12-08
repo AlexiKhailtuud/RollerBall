@@ -29,10 +29,11 @@ public class SightSensor : Sensor
     public override void Notify(Trigger trigger)
     {
         //Debug.Log($"I see a {trigger.gameObject.name}");
-        //Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
+        Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
 
         if (senseMemory != null)
         {
+            //Debug.Log("Adding sight to list");
             senseMemory.AddToList(trigger.gameObject, 0.6f);
         }
     }
