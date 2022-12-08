@@ -63,7 +63,7 @@ public class SenseMemory : MonoBehaviour
                 {
                     memo.sensorType = type;
                 }
-                //what if put "break" here
+                //what if I put "break" here? 
             }
             break;
         }
