@@ -20,8 +20,8 @@ public class SimpleFSM : MonoBehaviour
     public float arriveDistance = 2f;
 
     private Transform playerTransform;
-    private float chaseDistance = 15f;
-    private float attackDistance = 5f;
+    private float chaseDistance = 17.5f;
+    private float attackDistance = 10f;
 
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPoint;
@@ -140,6 +140,7 @@ public class SimpleFSM : MonoBehaviour
         if (elapsedTime >= fireRate)
         {
             GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, transform.rotation);
+            bulletObj.GetComponent<BulletBehaviour>().Init();
             elapsedTime = 0;
         }
     }
