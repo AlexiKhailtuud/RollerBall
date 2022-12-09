@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
+  - PatrolPoints
+  - Bullet
+  - Enemy AI
   layers:
   - Default
   - TransparentFX
