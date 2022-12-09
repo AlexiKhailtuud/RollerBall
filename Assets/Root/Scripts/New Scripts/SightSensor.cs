@@ -10,15 +10,17 @@ public class SightSensor : Sensor
     public float fieldOfView = 45f;
     public float viewDistance = 100f;
 
-    //private AIController controller;
-
+    private AIController controller;
+    private Blackboard bb;
+    
     private void Start()
     {
-        //controller = GetComponent<AIController>();
+        controller = GetComponent<AIController>();
         sensorType = SensorType.Sight;
         manager.RegisterSensor(this);
-
         senseMemory = GetComponent<SenseMemory>();
+        
+        bb = FindObjectOfType<Blackboard>();
     }
 
     private void Update()
@@ -30,6 +32,12 @@ public class SightSensor : Sensor
     {
         //Debug.Log($"I see a {trigger.gameObject.name}");
         Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
+
+        if (trigger.tag == "Player")
+        {
+            bb.playerLastPosition = trigger.transform.position;
+            bb.lastSenseTime = Time.time;
+        }
 
         if (senseMemory != null)
         {
