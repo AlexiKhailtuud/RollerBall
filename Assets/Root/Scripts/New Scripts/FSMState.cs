@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum FSMState
 {
-    PATROL,
+    PATROL = 0,
     CHASE,
     ATTACK,
     DIE

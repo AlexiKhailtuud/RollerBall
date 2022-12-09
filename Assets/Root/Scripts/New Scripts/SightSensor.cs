@@ -30,11 +30,13 @@ public class SightSensor : Sensor
 
     public override void Notify(Trigger trigger)
     {
-        //Debug.Log($"I see a {trigger.gameObject.name}");
+        
         Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
 
-        if (trigger.tag == "Player")
+        if (trigger.CompareTag("Player"))
         {
+            //Debug.Log($"I see a {trigger.gameObject.tag}");
+            
             bb.playerLastPosition = trigger.transform.position;
             bb.lastSenseTime = Time.time;
         }
