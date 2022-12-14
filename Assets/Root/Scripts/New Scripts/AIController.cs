@@ -21,11 +21,11 @@ public class AIController : MonoBehaviour
     //Index to current patrol waypoint
     private int wayPointIndex = 0;
     
-    //Latest detected player position
+    //最近感知到的玩家位置
     private Vector3 playerLastSighted;
     
-    //Previous detected player position;
-    private Vector3 playerPreviousSighted;
+    //上次的玩家位置
+    private Vector3 playerLastSightBySelf;
     
     //Array for patrol waypoints
     private Vector3[] wayPoints;
@@ -42,11 +42,12 @@ public class AIController : MonoBehaviour
     {
         bb = FindObjectOfType<Blackboard>();
         playerLastSighted = bb.resetPosition;
-        playerPreviousSighted = bb.resetPosition;
+        playerLastSightBySelf = bb.resetPosition;
         
         memory = GetComponent<SenseMemory>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         
+        //set initial state
         state = FSMState.PATROL;
         wayPoints = new Vector3[patrolWayPoints.childCount];
 
@@ -63,10 +64,11 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
-        //if the in player position in Blackboard is not equal to player 
-        if (bb.playerLastPosition != playerPreviousSighted)
+        //if the in player position in Blackboard is not equal to the location last detected by this enemy
+        if (bb.playerLastSeenPosition != playerLastSightBySelf)
         {
-            playerLastSighted = bb.playerLastPosition;
+            Debug.Log("not equal");
+            playerLastSighted = bb.playerLastSeenPosition;
         }
 
         switch (state)
@@ -80,15 +82,18 @@ public class AIController : MonoBehaviour
             case FSMState.ATTACK:
                 UpdateAttack();
                 break;
-            case FSMState.DIE:
+            default:
                 break;
         }
+
+        playerLastSightBySelf = bb.playerLastSeenPosition;
     }
 
     public void UpdatePatrol()
     {
         state = FSMState.PATROL;
         
+        //if the enemy gets close enough to current patrol point, set next or reset patrol point by index 
         if (Vector3.Distance(transform.position, navMeshAgent.destination) < 3)
         {
             if (wayPointIndex == wayPoints.Length - 1)
@@ -102,12 +107,10 @@ public class AIController : MonoBehaviour
             navMeshAgent.SetDestination(wayPoints[wayPointIndex]);
         }
 
-        if (playerLastSighted != bb.playerLastPosition)
+        if (playerLastSighted != bb.resetPosition)
         {
             state = FSMState.CHASE;
         }
-
-        playerPreviousSighted = bb.playerLastPosition;
     }
 
     public void UpdateChase()
@@ -119,10 +122,14 @@ public class AIController : MonoBehaviour
         navMeshAgent.SetDestination(playerLastSighted);
         
         //Check if AI can see the player within shooting distance
-        if (Vector3.Distance(transform.position, navMeshAgent.destination) < shootingDistance && CanSeePlayer())
+        if (Vector3.Distance(transform.position, navMeshAgent.destination) < shootingDistance && HavePlayerSightMemory())
         {
-            
             state = FSMState.ATTACK;
+        }
+        else
+        {
+            Debug.Log("Lose sight of the player");
+            state = FSMState.PATROL;
         }
     }
 
@@ -134,18 +141,19 @@ public class AIController : MonoBehaviour
 
         if (playerLastSighted == bb.resetPosition)
         {
+            Debug.Log("Returning to patrol");
             state = FSMState.PATROL;
         }
 
-        if (playerLastSighted != playerPreviousSighted &&
-            Vector3.Distance(transform.position, playerPreviousSighted) > chasingDistance)
+        if (playerLastSighted != playerLastSightBySelf &&
+            Vector3.Distance(transform.position, playerLastSightBySelf) > chasingDistance)
         {
             state = FSMState.CHASE;
         }
     }
 
     //Check if AI has player' position in its memory
-    public bool CanSeePlayer()
+    public bool HavePlayerSightMemory()
     {
         if (memory != null)
         {

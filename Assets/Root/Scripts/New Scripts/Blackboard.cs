@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Blackboard : MonoBehaviour
 {
     //last player position detected  
-    public Vector3 playerLastPosition;
+    public Vector3 playerLastSeenPosition;
     
     //default position if player position not detected
     public Vector3 resetPosition;
@@ -19,7 +20,7 @@ public class Blackboard : MonoBehaviour
 
     private void Start()
     {
-        playerLastPosition = new Vector3(100, 100, 100);
+        playerLastSeenPosition = new Vector3(100, 100, 100);
         resetPosition = new Vector3(100, 100, 100);
     }
 
@@ -27,7 +28,7 @@ public class Blackboard : MonoBehaviour
     {
         if (Time.time - lastSenseTime > resetTime)
         {
-            
+            playerLastSeenPosition = resetPosition;
         }
     }
 }

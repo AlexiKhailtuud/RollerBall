@@ -5,22 +5,22 @@ using UnityEngine;
 
 public class SightSensor : Sensor
 {
-    public SenseMemory senseMemory;
-    
     public float fieldOfView = 45f;
     public float viewDistance = 100f;
 
     private AIController controller;
     private Blackboard bb;
+    private SenseMemory senseMemory;
     
     private void Start()
     {
         controller = GetComponent<AIController>();
         sensorType = SensorType.Sight;
         manager.RegisterSensor(this);
-        senseMemory = GetComponent<SenseMemory>();
-        
+
         bb = FindObjectOfType<Blackboard>();
+        
+        senseMemory = GetComponent<SenseMemory>();
     }
 
     private void Update()
@@ -30,14 +30,15 @@ public class SightSensor : Sensor
 
     public override void Notify(Trigger trigger)
     {
-        
         Debug.DrawLine(transform.position, trigger.transform.position, Color.magenta);
 
         if (trigger.CompareTag("Player"))
         {
             //Debug.Log($"I see a {trigger.gameObject.tag}");
+            //Debug.Log("Log player position onto Blackboard");
             
-            bb.playerLastPosition = trigger.transform.position;
+            //Log player position onto Blackboard
+            bb.playerLastSeenPosition = trigger.transform.position;
             bb.lastSenseTime = Time.time;
         }
 
